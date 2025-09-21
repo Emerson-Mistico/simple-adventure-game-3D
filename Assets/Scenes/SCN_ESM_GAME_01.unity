@@ -10345,7 +10345,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.41, z: 0}
 --- !u!114 &1939144522
 MonoBehaviour:
@@ -10361,9 +10361,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1755247081}
   characterController: {fileID: 1939144521}
-  speed: 30
+  speed: 25
   turnSpeed: 115
-  gravity: 9.8
+  gravity: 23
+  jumpSpeed: 17
+  jumpKeyCode: 32
+  keyRun: 304
+  speedRun: 1.5
 --- !u!1001 &1942738931
 PrefabInstance:
   m_ObjectHideFlags: 0
