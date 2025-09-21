@@ -1,7 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
-using ESM_TOOLS.Core.Singleton;
+using ESM.Core.Singleton;
 
 namespace Screens
 {

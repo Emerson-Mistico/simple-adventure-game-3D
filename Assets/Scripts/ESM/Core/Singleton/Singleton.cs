@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace ESM_TOOLS.Core.Singleton
+namespace ESM.Core.Singleton
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
