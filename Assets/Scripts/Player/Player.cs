@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player Setup")]
+
+    public Animator animator;
     public CharacterController characterController;
     public float speed = 1f;
     public float turnSpeed = 1f;
@@ -17,5 +20,14 @@ public class Player : MonoBehaviour
         vSpeed = gravity * Time.deltaTime;
         speedVector.y = vSpeed;
         characterController.Move(speedVector * Time.deltaTime);
+
+        if (inputAxisVertical != 0)
+        {
+            animator.SetBool("Run", true);
+        }
+        else
+        {
+            animator.SetBool("Run", false);
+        }
     }
 }
