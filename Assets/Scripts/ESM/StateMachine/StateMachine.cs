@@ -14,17 +14,8 @@ namespace ESM.StateMachine
         {
             get { return _currentState; }
         }
-
-        /*
-        public StateMachine (T state)
-        {
-            SwitchState(state);
-        }
-        */
-
         public void Init()
         {
-            // Debug.Log("Enter Init here");
             dictionaryState = new Dictionary<T, StateBase>();
         }
         public void RegisterStates(T typeenum, StateBase state)

@@ -1,7 +1,7 @@
 using UnityEngine;
 using ESM.StateMachine;
 
-public class GMStateIntro : StateBase
+public class PlayerStateWALK : StateBase
 {
     // implement
 }

@@ -16,10 +16,10 @@ public class GameManager : Singleton<GameManager>
 
     public void Start()
     {
-        Init();
+        InitGameStates();
     }
     
-    public void Init()
+    public void InitGameStates()
     {
         stateMachine = new StateMachine<GameStates>();
         stateMachine.Init();
