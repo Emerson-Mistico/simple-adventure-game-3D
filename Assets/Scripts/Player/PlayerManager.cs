@@ -47,7 +47,7 @@ public class PlayerManager : Singleton<PlayerManager>
     {
         InitPlayerStates();
         _currentStateToShow = stateMachine.CurrentState.ToString();
-        Debug.Log("Inicial State ->" + _currentStateToShow);
+        //Debug.Log("Inicial State ->" + _currentStateToShow);
     }
 
     void Update()
@@ -69,7 +69,7 @@ public class PlayerManager : Singleton<PlayerManager>
                 if (_currentStateToShow != "PlayerStateJUMP")
                 {
                     stateMachine.SwitchState(PlayerStates.JUMP);
-                    Debug.Log("Change to: JUMP");
+                    //Debug.Log("Change to: JUMP");
                 }                 
             }
         }
@@ -87,7 +87,7 @@ public class PlayerManager : Singleton<PlayerManager>
                 if (_currentStateToShow != "PlayerStateRUN")
                 {
                     stateMachine.SwitchState(PlayerStates.RUN);
-                    Debug.Log("Change to: RUN");
+                    //Debug.Log("Change to: RUN");
                 }
             }
             else
@@ -96,7 +96,7 @@ public class PlayerManager : Singleton<PlayerManager>
                 if (_currentStateToShow != "PlayerStateWALK")
                 {
                     stateMachine.SwitchState(PlayerStates.WALK);
-                    Debug.Log("Change to: WALK");
+                    //Debug.Log("Change to: WALK");
                 }
             }
         } 
@@ -105,7 +105,7 @@ public class PlayerManager : Singleton<PlayerManager>
             if (_currentStateToShow != "PlayerStateIDLE" && characterController.isGrounded)
             {
                 stateMachine.SwitchState(PlayerStates.IDLE);
-                Debug.Log("Change to: IDLE");
+                // Debug.Log("Change to: IDLE");
             }
         }
 
