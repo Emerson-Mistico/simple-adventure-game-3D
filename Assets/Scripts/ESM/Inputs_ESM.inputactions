@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "Inputs_ESM",
+    "maps": [
+        {
+            "name": "Gameplay",
+            "id": "43548e79-9b19-4638-b493-febe65c85634",
+            "actions": [
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "039ea174-7381-4696-ad42-4b388d95940e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "22138a10-fc05-4355-9365-769e384c9be7",
+                    "path": "<Keyboard>/x",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
