@@ -29,6 +29,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "9b7c69de-8050-4636-8d5c-cc6cdb221c9a",
+            "actions": [
+                {
+                    "name": "ChangeGun",
+                    "type": "Button",
+                    "id": "f00b68f8-e371-4255-b068-9286d25c7830",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0a8e2e40-a86d-418a-91ca-def716d476f8",
+                    "path": "<Keyboard>/c",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeGun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

@@ -23,25 +23,21 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
         inputs.Gameplay.Shoot.performed += cts => StartShoot();
         inputs.Gameplay.Shoot.canceled += cts => CancelShoot();
+        inputs.UI.ChangeGun.performed += cts => ChangeGun();
 
     }
 
-    private void Update()
+    private void ChangeGun()
     {
-        if (Input.GetKeyUp(KeyCode.C))
+        _gunIndex++;
+
+        if (_gunIndex >= gunList.Count)
         {
-            _gunIndex++;
-
-            if (_gunIndex >= gunList.Count)
-            {
-                _gunIndex = 0;
-            }
-
-            CreateGun(_gunIndex);
+            _gunIndex = 0;
         }
+
+        CreateGun(_gunIndex);
     }
-
-
     private void CreateGun(int gunToCreate)
     {
         _currentGun = Instantiate(gunList[gunToCreate], gunPosition);
