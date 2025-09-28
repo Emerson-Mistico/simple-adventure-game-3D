@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5165161950035993279}
   m_Layer: 0
   m_Name: PFB_GunBase
-  m_TagString: Untagged
+  m_TagString: UNLIMITED
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

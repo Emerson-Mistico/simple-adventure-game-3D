@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2725141988312712831}
   m_Layer: 0
   m_Name: PFB_GunAnglular
-  m_TagString: Untagged
+  m_TagString: ANGULAR
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,8 +104,9 @@ MonoBehaviour:
   positionToShoot: {fileID: 931878827370422087}
   timeBetweenShoot: 0.3
   speed: 50
-  maxShoot: 5
-  timeToRecharge: 1
+  uiGunUpdaters: []
+  maxShoot: 7
+  timeToRecharge: 4
   amountPershoot: 8
   angle: 15
 --- !u!1 &774594826999326802
