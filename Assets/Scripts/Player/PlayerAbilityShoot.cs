@@ -41,9 +41,11 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     private void CreateGun(int gunToCreate)
     {
         _currentGun = Instantiate(gunList[gunToCreate], gunPosition);
-        _currentGun.transform.localPosition = _currentGun.transform.localEulerAngles = Vector3.zero;
-        uiTextCurrentGun.text = gunList[gunToCreate].tag.ToString();
-        //Debug.Log("Current GUN: " + gunList[gunToCreate].tag);
+        _currentGun.transform.localPosition = _currentGun.transform.localEulerAngles = Vector3.zero;     
+
+        uiTextCurrentGun.text = _currentGun.tag.ToString();        
+        PlayerPrefs.SetString("CurrentGun", uiTextCurrentGun.text);
+        Debug.Log("Current GUN now is -> " + PlayerPrefs.GetString("CurrentGun"));
     }
    
     private void StartShoot()

@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 462ce66f3f489f7468f3d71842f79a2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabProjectile: {fileID: 2039208941091803022, guid: bbf523a72fd315149a98a7c76aece185, type: 3}
+  prefabProjectile: {fileID: 2039208941091803022, guid: 9c72f4593e75fb94cb1c784357599da7, type: 3}
   positionToShoot: {fileID: 5893157630447807644}
   timeBetweenShoot: 0.3
   speed: 50

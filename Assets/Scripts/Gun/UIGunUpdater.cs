@@ -10,7 +10,7 @@ public class UIGunUpdater : MonoBehaviour
     public float durationAnimation = 0.1f;
     public Ease ease = Ease.OutBack;
 
-    private Tween _currenTween;
+    private Tween _currenTween;   
 
     private void OnValidate()
     {
@@ -33,5 +33,6 @@ public class UIGunUpdater : MonoBehaviour
             _currenTween.Kill();
         }
         uiImage.DOFillAmount(1 - (current / max), durationAnimation).SetEase(ease);
-    }
+    }   
+
 }

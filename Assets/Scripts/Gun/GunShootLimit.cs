@@ -13,6 +13,7 @@ public class GunShootLimit : GunBase
 
     private float _currentShoots;
     private bool _recharging = false;
+    private string _currentGunName;
 
     private void Awake()
     {
