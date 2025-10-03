@@ -13,6 +13,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
     public int initialGun = 0;
 
     private GunBase _currentGun;
+    
     [SerializeField] private int _gunIndex = 0;
 
     protected override void Init()

@@ -135,3 +135,4 @@ MonoBehaviour:
   positionToShoot: {fileID: 3217848061527842675}
   timeBetweenShoot: 0.3
   speed: 50
+  amunitionMultipliyer: 2.5
