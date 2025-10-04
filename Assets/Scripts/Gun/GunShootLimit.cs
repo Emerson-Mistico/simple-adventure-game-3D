@@ -49,6 +49,7 @@ public class GunShootLimit : GunBase
     private void StartRecharge()
     {
         _recharging = true;
+        PlayerPrefs.SetInt("Recharging", 1);
         StartCoroutine(RechargeCoroutine());
     }
 
@@ -58,13 +59,14 @@ public class GunShootLimit : GunBase
         while(time < timeToRecharge){
 
             time += Time.deltaTime;
-            // Debug.Log("Recharge time: " + time);
+            // Debug.Log("Recharge time: " + time + " -> Recarregando = " + PlayerPrefs.GetInt("Recharging").ToString());
             uiGunUpdaters.ForEach(i => i.UpdateValue(time/timeToRecharge));
             yield return new WaitForEndOfFrame();
 
         }
         _currentShoots = 0;
         _recharging = false;
+        PlayerPrefs.SetInt("Recharging", 0);
     }
 
     public void UpdateUI()

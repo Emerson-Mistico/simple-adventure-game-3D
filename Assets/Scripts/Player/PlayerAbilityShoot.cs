@@ -30,14 +30,24 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     private void ChangeGun()
     {
-        _gunIndex++;
-
-        if (_gunIndex >= gunList.Count)
+        if (PlayerPrefs.GetInt("Recharging") == 0)
         {
-            _gunIndex = 0;
+
+            _gunIndex++;
+
+            if (_gunIndex >= gunList.Count)
+            {
+                _gunIndex = 0;
+            }
+
+            CreateGun(_gunIndex);
+        }
+        else
+        {
+            Debug.Log("ATTENTION: CAN´T CHANGE GUN WHILE RECHARGING!");
         }
 
-        CreateGun(_gunIndex);
+        
     }
     private void CreateGun(int gunToCreate)
     {

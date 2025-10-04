@@ -12,7 +12,8 @@ public class PlayerManager : Singleton<PlayerManager>
         WALK,
         RUN,
         JUMP,
-        DEATH
+        DEATH,
+        RECHARGING
     }
 
     #region PUBLICS
@@ -131,6 +132,7 @@ public class PlayerManager : Singleton<PlayerManager>
         stateMachine.RegisterStates(PlayerStates.RUN, new PlayerStateRUN());
         stateMachine.RegisterStates(PlayerStates.JUMP, new PlayerStateJUMP());
         stateMachine.RegisterStates(PlayerStates.DEATH, new PlayerStateDEATH());
+        stateMachine.RegisterStates(PlayerStates.RECHARGING, new PlayerStateRECHARGING());
         
         stateMachine.SwitchState(PlayerStates.IDLE);
     }  
