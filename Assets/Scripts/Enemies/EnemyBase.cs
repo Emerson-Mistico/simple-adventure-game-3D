@@ -14,6 +14,9 @@ namespace Enemy
         public bool startWithBornAnimation = true;
         public Collider collier;
 
+        public FlashColor flashColor;
+        public ParticleSystem particlesToKill;
+
         [SerializeField] private AnimationBase _animationBase;
         [SerializeField] private float _currentLife;
 
@@ -47,12 +50,21 @@ namespace Enemy
             {
                 collier.enabled = false;
             }
+            if (particlesToKill != null)
+            {
+                particlesToKill.Emit(15);
+            }
             Destroy(gameObject, 1.4f);
             PlayAnimationByTrigger(AnimationType.DEATH);
         }
 
         public void OnDamage(float f)
         {
+            if(flashColor != null)
+            {
+                flashColor.Flash();
+            }           
+
             _currentLife -= f;
 
             if (_currentLife <= 0) 
@@ -85,7 +97,7 @@ namespace Enemy
 
         public void Damage(float damage)
         {
-            Debug.Log("Tomou dano de: " + damage + " pts.");
+            Debug.Log("Tomou dano de: " + damage + " pts. Vida atual: " + _currentLife);
             OnDamage(damage);
         }
     }
