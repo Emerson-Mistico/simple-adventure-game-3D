@@ -56,6 +56,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
         uiTextCurrentGun.text = _currentGun.tag.ToString();        
         PlayerPrefs.SetString("CurrentGun", uiTextCurrentGun.text);
+        PlayerPrefs.SetInt("Recharging", 0);
         Debug.Log("Current GUN now is -> " + PlayerPrefs.GetString("CurrentGun"));
     }
    

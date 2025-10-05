@@ -5,11 +5,10 @@ using UnityEngine;
 public class ProjectileBase : MonoBehaviour
 {
     [Header("Amunition Setup")]
-
     public float timeToDestroy = 2f;
-    public int amountDamage = 1;
+    public int amountDamage = 5;
     public int amountCost = 5;
-    public float speed = 50f;
+    public float speed = 100f;
 
     private void Awake()
     {
@@ -26,6 +25,11 @@ public class ProjectileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        var damageable = collision.transform.GetComponent<IDamageable>();
+        if (damageable != null) 
+        { 
+            damageable.Damage(amountDamage);
+            Destroy(gameObject);
+        }
     }
 }
