@@ -13,6 +13,8 @@ public class GunBase : MonoBehaviour
     public float speed = 50f;
     public float amunitionMultipliyer = 1f;
 
+    public GameObject tartgetToShoot = null;
+
     public Coroutine _currentCoroutine;
 
     protected virtual IEnumerator ShootCoroutine()
@@ -31,6 +33,10 @@ public class GunBase : MonoBehaviour
         projectile.transform.rotation = positionToShoot.rotation;
         projectile.transform.localScale = Vector3.one * amunitionMultipliyer;
         projectile.speed = speed;
+        if (tartgetToShoot != null)
+        {
+            projectile.transform.LookAt(tartgetToShoot.transform.position);
+        }
     }    
     
     public void StartShoot()

@@ -7,6 +7,11 @@ TagManager:
   - ANGULAR
   - FIVE SHOTS
   - UNLIMITED
+  - Enemy
+  - Boss
+  - BOSS KILLER
+  - NORMAL GUN
+  - SPRAY GUN
   layers:
   - Default
   - TransparentFX

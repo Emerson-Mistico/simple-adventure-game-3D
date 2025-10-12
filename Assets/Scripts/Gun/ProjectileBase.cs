@@ -10,6 +10,9 @@ public class ProjectileBase : MonoBehaviour
     public int amountCost = 5;
     public float speed = 100f;
 
+    [Header("To HIT")]
+    public List<string> tagsToHit;
+
     private void Awake()
     {
         //ItemManager.Instance.RemoveItemEnergy(amountCost);
@@ -25,11 +28,27 @@ public class ProjectileBase : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        var damageable = collision.transform.GetComponent<IDamageable>();
-        if (damageable != null) 
-        { 
-            damageable.Damage(amountDamage);
-            Destroy(gameObject);
-        }
+        // Debug.Log("Tiro atingiu: " + collision.transform.tag);
+
+        foreach (var tagToCompare in tagsToHit)
+        {
+            // Debug.Log("Tag para dano: " + tagToCompare);
+
+            if(collision.transform.tag == tagToCompare)
+            {
+                var damageable = collision.transform.GetComponent<IDamageable>();
+                if (damageable != null)
+                {
+                    Vector3 damageDirection = collision.transform.position - transform.position;
+                    damageDirection = -damageDirection.normalized;
+                    damageDirection.y = 0;
+
+                    damageable.Damage(amountDamage, damageDirection);
+                    Destroy(gameObject);
+                }
+
+                break;
+            }            
+        }        
     }
 }

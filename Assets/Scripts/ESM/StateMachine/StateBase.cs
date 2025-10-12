@@ -4,7 +4,7 @@ namespace ESM.StateMachine
 {
     public class StateBase
     {
-        public virtual void OnStateEnter(object o = null)
+        public virtual void OnStateEnter(params object[] objects)
         {
             //Debug.Log("OnStateEnter");
         }

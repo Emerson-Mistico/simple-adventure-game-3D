@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 6192070369654678492}
   - component: {fileID: 5165161950035993279}
   m_Layer: 0
-  m_Name: PFB_GunBase
+  m_Name: PFB_GunBase - Boss
   m_TagString: UNLIMITED
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6403831473747469231}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.37400007, z: 0.034999847}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -134,8 +134,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b644a446cc17d547bccfdee7d657d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabProjectile: {fileID: 2039208941091803022, guid: bbf523a72fd315149a98a7c76aece185, type: 3}
+  prefabProjectile: {fileID: 2039208941091803022, guid: 8eeb67426bd9bd54999deeb10eaaf13a, type: 3}
   positionToShoot: {fileID: 3217848061527842675}
-  timeBetweenShoot: 0.3
-  speed: 50
-  amunitionMultipliyer: 2.5
+  timeBetweenShoot: 0.44
+  speed: 60
+  amunitionMultipliyer: 10
+  tartgetToShoot: {fileID: 0}

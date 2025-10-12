@@ -50,6 +50,8 @@ MonoBehaviour:
   amountDamage: 2
   amountCost: 5
   speed: 70
+  tagsToHit:
+  - Enemy
 --- !u!54 &2800063576226786525
 Rigidbody:
   m_ObjectHideFlags: 0

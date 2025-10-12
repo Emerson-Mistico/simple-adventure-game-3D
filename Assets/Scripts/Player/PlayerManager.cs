@@ -1,10 +1,12 @@
 using ESM.Core.Singleton;
 using ESM.StateMachine;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static GameManager;
+using System.Collections.Generic;
 
-public class PlayerManager : Singleton<PlayerManager>
+public class PlayerManager : Singleton<PlayerManager>, IDamageable
 {
     public enum PlayerStates
     {
@@ -23,6 +25,9 @@ public class PlayerManager : Singleton<PlayerManager>
     [Header("Animation Setup")]
     public Animator animator;
     public CharacterController characterController;
+
+    [Header("Colors to Flash")]
+    public List<FlashColor> flashColors;
 
     [Header("Speed Setup")]
     public float speed = 25f;
@@ -135,6 +140,17 @@ public class PlayerManager : Singleton<PlayerManager>
         stateMachine.RegisterStates(PlayerStates.RECHARGING, new PlayerStateRECHARGING());
         
         stateMachine.SwitchState(PlayerStates.IDLE);
-    }  
+    }
 
+    #region LIFE
+    public void Damage(float damage)
+    {
+        flashColors.ForEach(i => i.Flash());
+    }
+
+    public void Damage(float damage, Vector3 direction)
+    {
+        Damage(damage);
+    }
+    #endregion
 }

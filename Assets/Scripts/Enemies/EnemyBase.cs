@@ -6,23 +6,43 @@ using Animation;
 namespace Enemy 
 {
     public class EnemyBase : MonoBehaviour, IDamageable
-    {        
-        public float startLife = 10f;       
+    {
+        [Header("Enemy Settings")]        
+        public float startLife = 10f;
+        public GameObject lifeIndicator = null;
+        public Collider collider;
 
+        [Header("Animation Settings")]
         public float startAnimationDuration = .2f;
         public Ease startAnimationEase = Ease.OutBack;
         public bool startWithBornAnimation = true;
-        public Collider collier;
-
         public FlashColor flashColor;
         public ParticleSystem particlesToKill;
+        public bool lookAtTarget = false;
 
         [SerializeField] private AnimationBase _animationBase;
         [SerializeField] private float _currentLife;
 
+        private PlayerManager _player;
+
+        private Vector3 _lifeInitScale;
+        private Vector3 _lifeInitLocalPos;
+
         private void Awake()
         {
             Init();
+            if (lifeIndicator != null) 
+            { 
+                lifeIndicator.SetActive(true);
+
+                _lifeInitScale = lifeIndicator.transform.localScale;
+                _lifeInitLocalPos = lifeIndicator.transform.localPosition;
+            }
+        }
+
+        private void Start()
+        {
+            _player = GameObject.FindObjectOfType<PlayerManager>();
         }
 
         protected void ResetLife()
@@ -46,9 +66,9 @@ namespace Enemy
 
         protected virtual void OnKill() 
         { 
-            if (collier != null)
+            if (collider != null)
             {
-                collier.enabled = false;
+                collider.enabled = false;
             }
             if (particlesToKill != null)
             {
@@ -63,18 +83,39 @@ namespace Enemy
             if(flashColor != null)
             {
                 flashColor.Flash();
-            }           
+            }
+
+            transform.position -= transform.forward;            
 
             _currentLife -= f;
+            UpdateLifeIndicatorAnimated();
 
             if (_currentLife <= 0) 
             {
                 Kill();
             }
-
         }
 
         #region ANIMATION
+        private void UpdateLifeIndicatorAnimated(float duration = 0.1f)
+        {
+            if (lifeIndicator == null) return;
+
+            float ratio = Mathf.Clamp01(_currentLife / Mathf.Max(0.0001f, startLife));
+            float newY = _lifeInitScale.y * ratio;
+            float delta = _lifeInitScale.y - newY;
+
+            lifeIndicator.transform.DOScaleY(newY, duration);
+
+            // Reposiciona o centro para manter a base fixa
+            float newLocalY = _lifeInitLocalPos.y - (delta * 0.5f);
+            lifeIndicator.transform.DOLocalMoveY(newLocalY, duration);
+
+            if (ratio <= 0f)
+            {
+                lifeIndicator.SetActive(false);
+            }                
+        }
         private void BornAnimation()
         {
             transform.DOScale(0, startAnimationDuration).SetEase(startAnimationEase).From();
@@ -87,18 +128,36 @@ namespace Enemy
 
         #endregion
 
-        private void Update()
+        public virtual void Update()
         {
-            if (Input.GetKeyDown(KeyCode.T))
+            if (lookAtTarget)
             {
-                OnDamage(5f);
+                transform.LookAt(_player.transform.position);
             }
         }
 
         public void Damage(float damage)
         {
-            Debug.Log("Tomou dano de: " + damage + " pts. Vida atual: " + _currentLife);
+            //Debug.Log("Dano de: " + damage + " pts. Vida atual: " + _currentLife);
             OnDamage(damage);
         }
+        public void Damage(float damage, Vector3 damageDirection)
+        {
+            //Debug.Log("Dano de: " + damage + " pts. Vida atual: " + _currentLife);
+            OnDamage(damage);
+            transform.DOMove(transform.position - damageDirection, 0.1f);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            PlayerManager p = collision.transform.GetComponent<PlayerManager>();
+
+            if (p != null) 
+            {
+                //Debug.Log("Player colidiu com um inimigo");
+                p.Damage(1);
+            }
+        }
+
     }
 }

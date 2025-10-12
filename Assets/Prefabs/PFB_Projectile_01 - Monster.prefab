@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3745232764009056588}
   - component: {fileID: 2039208941091803022}
-  - component: {fileID: 5159406943092987949}
+  - component: {fileID: 2800063576226786525}
   m_Layer: 0
-  m_Name: PFB_Projectile_02
+  m_Name: PFB_Projectile_01 - Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,14 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9137f6bcfd5f356469f6870ce39c92b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToDestroy: 2
-  amountDamage: 5
+  timeToDestroy: 5
+  amountDamage: 2
   amountCost: 5
-  speed: 50
+  speed: 70
   tagsToHit:
-  - Boss
-  - Enemy
---- !u!54 &5159406943092987949
+  - Player
+--- !u!54 &2800063576226786525
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +146,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 50e50f8e1452a834fa54012bd0189bce, type: 2}
+  - {fileID: 2100000, guid: 2332e1d61440ca248abb787a73a935eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
