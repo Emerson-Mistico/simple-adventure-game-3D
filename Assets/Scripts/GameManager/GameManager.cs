@@ -1,6 +1,8 @@
 using ESM.Core.Singleton;
 using ESM.StateMachine;
+using UnityEngine;
 
+[DefaultExecutionOrder(-1000)]
 public class GameManager : Singleton<GameManager>
 {       
     public enum GameStates
@@ -13,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     public StateMachine<GameStates> stateMachine;
-
+        
     public void Start()
     {
         InitGameStates();
@@ -30,5 +32,5 @@ public class GameManager : Singleton<GameManager>
         stateMachine.RegisterStates(GameStates.LOSE, new StateBase()); 
 
         stateMachine.SwitchState(GameStates.INTRO);
-    }
+    }        
 }

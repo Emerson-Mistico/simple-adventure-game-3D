@@ -109,7 +109,8 @@ MonoBehaviour:
   speed: 50
   amunitionMultipliyer: 3.5
   tartgetToShoot: {fileID: 0}
-  uiGunUpdaters: []
+  uiEssentialUpdaters:
+  - {fileID: 0}
   maxShoot: 5
   timeToRecharge: 4
 --- !u!1 &6073298556357421129

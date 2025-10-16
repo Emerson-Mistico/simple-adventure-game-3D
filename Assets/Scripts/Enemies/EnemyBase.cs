@@ -155,7 +155,7 @@ namespace Enemy
             if (p != null) 
             {
                 //Debug.Log("Player colidiu com um inimigo");
-                p.Damage(1);
+                p.playerHealth.Damage(1);
             }
         }
 

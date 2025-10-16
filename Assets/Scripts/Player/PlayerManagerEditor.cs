@@ -1,6 +1,6 @@
 using System.Linq;
 using UnityEditor;
-
+/*
 [CustomEditor(typeof(PlayerManager))]
 public class PlayerManagerEditor : Editor
 {
@@ -40,4 +40,4 @@ public class PlayerManagerEditor : Editor
             }
         }
     }
-}
+}*/

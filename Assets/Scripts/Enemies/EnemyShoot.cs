@@ -12,7 +12,7 @@ namespace Enemy
         {
             base.Init();
 
-            gunBase.StartShoot();
+            gunBase.StartShoot();            
         }        
         
     }

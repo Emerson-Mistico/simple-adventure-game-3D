@@ -28,14 +28,17 @@ public class GunBase : MonoBehaviour
 
     public virtual void Shoot()
     {
-        var projectile = Instantiate(prefabProjectile);
-        projectile.transform.position = positionToShoot.position;
-        projectile.transform.rotation = positionToShoot.rotation;
-        projectile.transform.localScale = Vector3.one * amunitionMultipliyer;
-        projectile.speed = speed;
-        if (tartgetToShoot != null)
+        if(PlayerPrefs.GetInt("PlayerIsAlive") == 1)
         {
-            projectile.transform.LookAt(tartgetToShoot.transform.position);
+            var projectile = Instantiate(prefabProjectile);
+            projectile.transform.position = positionToShoot.position;
+            projectile.transform.rotation = positionToShoot.rotation;
+            projectile.transform.localScale = Vector3.one * amunitionMultipliyer;
+            projectile.speed = speed;
+            if (tartgetToShoot != null)
+            {
+                projectile.transform.LookAt(tartgetToShoot.transform.position);
+            }             
         }
     }    
     

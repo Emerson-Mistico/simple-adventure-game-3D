@@ -13,6 +13,8 @@ public class ProjectileBase : MonoBehaviour
     [Header("To HIT")]
     public List<string> tagsToHit;
 
+    private int _currentPlayerIsAlive;
+
     private void Awake()
     {
         //ItemManager.Instance.RemoveItemEnergy(amountCost);
@@ -22,8 +24,16 @@ public class ProjectileBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _currentPlayerIsAlive = PlayerPrefs.GetInt("PlayerIsAlive");
         // transform.Translate(Vector3.forward * (Time.deltaTime * speed));
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        if(_currentPlayerIsAlive == 1)
+        {
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
