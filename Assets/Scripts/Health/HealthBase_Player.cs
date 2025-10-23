@@ -29,6 +29,7 @@ public class HealthBase_Player : MonoBehaviour, IDamageable
     {
         _currentLife = startLife;
         PlayerPrefs.SetInt("PlayerIsAlive", 1);
+        PlayerPrefs.SetInt("BossFightState", 0);
         UpdateUI();
     }
 

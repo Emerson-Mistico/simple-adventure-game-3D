@@ -24,7 +24,7 @@ namespace Boss
     {
         [Header("Boss")]
         public HealthBase healthBase;
-        public Collider collider;
+        public Collider colliderBoss;
 
         public GameObject uiBoss;
 
@@ -48,7 +48,8 @@ namespace Boss
         public GunBase gunBase;
 
         private StateMachine<BossAction> stateMachine;
-        private PlayerManager _player;        
+        private PlayerManager _player;
+        private int _playerIsAlive;
 
         private void Awake()
         {
@@ -58,15 +59,25 @@ namespace Boss
         }
         private void Start()
         {
-            _player = GameObject.FindObjectOfType<PlayerManager>();
+            // _player = GameObject.FindObjectOfType<PlayerManager>();
+            _player = GameObject.FindAnyObjectByType<PlayerManager>();
         }
 
         public virtual void Update()
         {
-            if (lookAtTarget)
+            _playerIsAlive = PlayerPrefs.GetInt("PlayerIsAlive");
+
+            if (lookAtTarget && _playerIsAlive == 1)
             {
                 transform.LookAt(_player.transform.position);
             }
+
+            if (IsAlive() && PlayerPrefs.GetInt("PlayerIsAlive") == 0)
+            {
+                healthBase._currentLife = healthBase.startLife;
+                healthBase.uiBossUpdater.UpdateValue(healthBase.startLife, healthBase._currentLife);
+            }
+
         }
         private void Init()
         {
@@ -79,6 +90,11 @@ namespace Boss
             stateMachine.RegisterStates(BossAction.DEATH, new BossStateDeath());
 
             SwtichState(BossAction.INIT);
+        }
+
+        public bool IsAlive()
+        {
+            return healthBase._currentLife > 0;
         }
 
         #region DEBUG
@@ -101,9 +117,9 @@ namespace Boss
 
         private void OnBossKill(HealthBase h)
         {
-            if (collider != null)
+            if (colliderBoss != null)
             {
-                collider.enabled = false;
+                colliderBoss.enabled = false;
             }
             if (particlesToKill != null)
             {
@@ -112,6 +128,8 @@ namespace Boss
             PlayAnimationByTrigger(AnimationType.DEATH);
             SwtichState(BossAction.DEATH);
             uiBoss.SetActive(false);
+            PlayerPrefs.SetInt("BossFightState", 0);
+            PlayerPrefs.SetInt("Boss01Alive", 0);
         }
 
         #region STATEMACHINE

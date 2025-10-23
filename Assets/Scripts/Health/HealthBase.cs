@@ -18,7 +18,7 @@ public class HealthBase : MonoBehaviour, IDamageable
 
     public UIBossUpdater uiBossUpdater;
 
-    [SerializeField] private float _currentLife;
+    [SerializeField] public float _currentLife;
     [SerializeField] private string _currentTag;
 
     private void Awake()
@@ -95,12 +95,11 @@ public class HealthBase : MonoBehaviour, IDamageable
 
         OnDamage?.Invoke(this);
     }
-
     private void UiBossUpdate(string tag, float cLife, float sLife)
     {
         if (tag == "Boss")
         {
-            Debug.Log("É dano no Boss. Vida atual: " + cLife + "/" + sLife);
+            //Debug.Log("É dano no Boss. Vida atual: " + cLife + "/" + sLife);
             uiBossUpdater.UpdateValue(sLife, cLife);
         }
     }
@@ -108,7 +107,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         if (tag == "Boss")
         {
-            Debug.Log("É dano no Boss. Vida atual: " + sLife + "/" + sLife);
+            //Debug.Log("É dano no Boss. Vida atual: " + sLife + "/" + sLife);
             uiBossUpdater.UpdateValue(sLife);
         }
     }

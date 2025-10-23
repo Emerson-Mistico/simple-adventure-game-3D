@@ -7,8 +7,7 @@ public class CheckPointManager : Singleton<CheckPointManager>
 {
     public string messageToActivate = "New Checkpoint Found!";
     public int lastCheckPoint = 0;
-    public List<CheckPointBase> checkPoints;    
-
+    public List<CheckPointBase> checkPoints;
     public bool HasCheckPoint()
     {
         return lastCheckPoint > 0;
@@ -22,22 +21,18 @@ public class CheckPointManager : Singleton<CheckPointManager>
 
             if (showMessage)
             {
-                var mm = MessageManager.Instance;
-                if (mm != null)
+                var messageManagerTemp = MessageManager.Instance;
+                if (messageManagerTemp != null)
                 {
-                    mm.ChangeMessageTemporary(messageToActivate, 1.5f);
-                }
-                else
-                {
-                    Debug.LogError("MessageManager.Instance é null. Adicione um MessageManager na cena ou inicialize antes de usar.");
+                    messageManagerTemp.ChangeMessageTemporary(messageToActivate, 1.5f);
+                    Debug.Log("Last CheckPoint: " + lastCheckPoint);
                 }
             }            
         }
     }
 
     public Vector3 GetPositionFromLastCheckPoint()
-    {
-        Debug.Log("Last = " + lastCheckPoint);
+    {   
         var checkPoint = checkPoints.Find(i => i.checkPointID == lastCheckPoint);
         return checkPoint.transform.position;
     }

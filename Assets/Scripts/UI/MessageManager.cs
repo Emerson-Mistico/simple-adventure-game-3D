@@ -20,15 +20,16 @@ public class MessageManager : Singleton<MessageManager>
 
     private string _msgNull = "";
     private Tween _currentTween;
-
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if (uiMainMessage == null)
             uiMainMessage = GetComponentInChildren<TextMeshProUGUI>(true);
 
         if (uiMainMessage == null)
         {
-            Debug.LogError("uiMainMessage não atribuído no MessageManager.");
+            Debug.LogError("uiMainMessage not exists in MessageManager.");
             return;
         }
 

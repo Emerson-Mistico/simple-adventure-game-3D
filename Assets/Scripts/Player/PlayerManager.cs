@@ -7,6 +7,7 @@ using static GameManager;
 using System.Collections.Generic;
 using NaughtyAttributes;
 
+[DefaultExecutionOrder(-999)]
 public class PlayerManager : Singleton<PlayerManager>
 {
     public enum PlayerStates
@@ -26,6 +27,7 @@ public class PlayerManager : Singleton<PlayerManager>
     [Header("Life Setup")]
     public HealthBase_Player playerHealth;
     public string messageDeath = "YOU DIED";
+    public GameObject globalVolume;
 
     [Header("Animation Setup")]
     public Animator animator;
@@ -59,8 +61,10 @@ public class PlayerManager : Singleton<PlayerManager>
         if (playerHealth == null) playerHealth = GetComponent<HealthBase_Player>();
     }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         OnValidate();
         playerHealth.OnDamage += Damage;
         playerHealth.OnKill += OnKill;
@@ -166,24 +170,26 @@ public class PlayerManager : Singleton<PlayerManager>
             animator.SetTrigger("Death");
             stateMachine.SwitchState(PlayerStates.DEATH);
 
+            globalVolume.SetActive(true);
             Invoke(nameof(ShowDiedMessage), 1.0f);
             Invoke(nameof(RespawnPosition), 4.0f);
             Invoke(nameof(ReactivatePlayer), 4.1f);
+            Invoke(nameof(ChangeScreenToNormal), 4.0f);
         }
+    }
+    private void ChangeScreenToNormal()
+    {
+        globalVolume.SetActive(false);
     }
 
     private void ShowDiedMessage()
     {
         if (messageDeath != "")
         {
-            var mm = MessageManager.Instance;
-            if (mm != null)
+            var messageManagerTemp = MessageManager.Instance;
+            if (messageManagerTemp != null)
             {
-                mm.ChangeMessageTemporary(messageDeath, 1.5f);
-            }
-            else
-            {
-                Debug.LogError("MessageManager.Instance é null. Adicione um MessageManager na cena ou inicialize antes de usar.");
+                messageManagerTemp.ChangeMessageTemporary(messageDeath, 1.5f);
             }
         }
     }
@@ -205,12 +211,23 @@ public class PlayerManager : Singleton<PlayerManager>
     }
     public void Damage(HealthBase_Player h)
     {
+        if (CameraShakeManager.Instance != null)
+        {
+            CameraShakeManager.Instance.ShakeON();
+        }
+
         flashColors.ForEach(i => i.Flash());
+        
     }
 
     public void Damage(float damage, Vector3 direction)
     {
-        // Damage(damage);
+        if (CameraShakeManager.Instance != null)
+        {
+            CameraShakeManager.Instance.ShakeON();
+        }
+
+        flashColors.ForEach(i => i.Flash());
     }
     #endregion
 

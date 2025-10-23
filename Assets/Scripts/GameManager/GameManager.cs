@@ -1,3 +1,4 @@
+using DG.Tweening;
 using ESM.Core.Singleton;
 using ESM.StateMachine;
 using UnityEngine;
@@ -14,11 +15,15 @@ public class GameManager : Singleton<GameManager>
         LOSE
     }
 
-    public StateMachine<GameStates> stateMachine;
-        
+    public StateMachine<GameStates> stateMachine;    
+
     public void Start()
     {
         InitGameStates();
+        PlayerPrefs.SetInt("Boss01Alive", 1);
+        PlayerPrefs.SetInt("BossFightState", 0);
+
+        DOTween.SetTweensCapacity(3000, 500);
     }
     
     public void InitGameStates()

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using Animation;
+using Unity.VisualScripting;
 
 
 namespace Enemy 
@@ -10,7 +11,7 @@ namespace Enemy
         [Header("Enemy Settings")]        
         public float startLife = 10f;
         public GameObject lifeIndicator = null;
-        public Collider collider;
+        public Collider enemyCollider;
 
         [Header("Animation Settings")]
         public float startAnimationDuration = .2f;
@@ -24,9 +25,11 @@ namespace Enemy
         [SerializeField] private float _currentLife;
 
         private PlayerManager _player;
+        private int _playerIsAlive;
 
         private Vector3 _lifeInitScale;
         private Vector3 _lifeInitLocalPos;
+        private Vector3 _initialEnemyPosition;
 
         private void Awake()
         {
@@ -37,17 +40,40 @@ namespace Enemy
 
                 _lifeInitScale = lifeIndicator.transform.localScale;
                 _lifeInitLocalPos = lifeIndicator.transform.localPosition;
+                _initialEnemyPosition = this.transform.localPosition;
+
+            }
+        }
+        public virtual void Update()
+        {
+            _playerIsAlive = PlayerPrefs.GetInt("PlayerIsAlive");
+
+            if (lookAtTarget && _playerIsAlive == 1)
+            {
+                transform.LookAt(_player.transform.position);
+            }
+
+            if (IsAlive() && PlayerPrefs.GetInt("PlayerIsAlive") == 0)
+            {
+                _currentLife = startLife;
+                this.transform.localPosition = _initialEnemyPosition;
+                UpdateLifeIndicatorAnimated();
             }
         }
 
         private void Start()
         {
-            _player = GameObject.FindObjectOfType<PlayerManager>();
+            // _player = GameObject.FindObjectOfType<PlayerManager>();
+            _player = Object.FindAnyObjectByType<PlayerManager>();
         }
 
         protected void ResetLife()
         {
             _currentLife = startLife;
+        }
+        public bool IsAlive()
+        {
+            return _currentLife > 0;
         }
 
         protected virtual void Init()
@@ -66,16 +92,21 @@ namespace Enemy
 
         protected virtual void OnKill() 
         { 
-            if (collider != null)
+            if (enemyCollider != null)
             {
-                collider.enabled = false;
+                enemyCollider.enabled = false;
             }
             if (particlesToKill != null)
             {
                 particlesToKill.Emit(15);
             }
-            Destroy(gameObject, 1.4f);
+            // Destroy(gameObject, 1.4f);
+            Invoke(nameof(DisableObject), 1.4f);
             PlayAnimationByTrigger(AnimationType.DEATH);
+        }
+        private void DisableObject()
+        {
+            gameObject.SetActive(false);
         }
 
         public void OnDamage(float f)
@@ -85,7 +116,7 @@ namespace Enemy
                 flashColor.Flash();
             }
 
-            transform.position -= transform.forward;            
+            //transform.position -= transform.forward;            
 
             _currentLife -= f;
             UpdateLifeIndicatorAnimated();
@@ -126,15 +157,7 @@ namespace Enemy
             _animationBase.PlayAnimationByTrigger(animationType);
         }
 
-        #endregion
-
-        public virtual void Update()
-        {
-            if (lookAtTarget)
-            {
-                transform.LookAt(_player.transform.position);
-            }
-        }
+        #endregion        
 
         public void Damage(float damage)
         {
@@ -145,7 +168,8 @@ namespace Enemy
         {
             //Debug.Log("Dano de: " + damage + " pts. Vida atual: " + _currentLife);
             OnDamage(damage);
-            transform.DOMove(transform.position - damageDirection, 0.1f);
+            transform.DOMove(transform.position - damageDirection, 0.1f);           
+
         }
 
         private void OnCollisionEnter(Collision collision)

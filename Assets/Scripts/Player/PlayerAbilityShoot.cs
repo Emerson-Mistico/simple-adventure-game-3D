@@ -30,7 +30,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
 
     private void ChangeGun()
     {
-        if (PlayerPrefs.GetInt("Recharging") == 0)
+        if (PlayerPrefs.GetInt("Recharging") == 0 && PlayerPrefs.GetInt("PlayerIsAlive") == 1)
         {
 
             _gunIndex++;
@@ -44,7 +44,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
         }
         else
         {
-            Debug.Log("ATTENTION: CAN´T CHANGE GUN WHILE RECHARGING!");
+            Debug.Log("ATTENTION: CAN´T CHANGE GUN WHILE RECHARGING OR YOU AREA DEAD!");
         }
 
         
@@ -57,7 +57,7 @@ public class PlayerAbilityShoot : PlayerAbilityBase
         uiTextCurrentGun.text = _currentGun.tag.ToString();        
         PlayerPrefs.SetString("CurrentGun", uiTextCurrentGun.text);
         PlayerPrefs.SetInt("Recharging", 0);
-        Debug.Log("Current GUN now is -> " + PlayerPrefs.GetString("CurrentGun"));
+        // Debug.Log("Current GUN now is -> " + PlayerPrefs.GetString("CurrentGun"));
     }
    
     private void StartShoot()
