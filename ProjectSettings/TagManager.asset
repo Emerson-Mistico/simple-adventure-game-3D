@@ -12,6 +12,7 @@ TagManager:
   - BOSS KILLER
   - NORMAL GUN
   - SPRAY GUN
+  - COIN
   layers:
   - Default
   - TransparentFX

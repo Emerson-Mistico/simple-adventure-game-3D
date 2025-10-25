@@ -26,7 +26,7 @@ namespace ESM.Core.Singleton
         protected virtual void Awake()
         {           
             // Information: singleton is Root?
-            Debug.Log($"{name} isRoot? {transform.parent == null}");
+            // Debug.Log($"{name} isRoot? {transform.parent == null}");
 
             if (_instance == null)
             {
