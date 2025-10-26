@@ -3,56 +3,62 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ItemCollectableBase : MonoBehaviour
+namespace Itens
 {
-    [Header("Collect Setup")]
-    public string tagToCompare = "Player";
-    public int itemValue = 1;
-
-    public GameObject graphicItem;
-
-    [Header("Animation")]
-    public ParticleSystem particle;
-
-    [Header("Sounds")]
-    public AudioSource soundToUse;
-
-    private void OnTriggerEnter(Collider collision)
+    public class ItemCollectableBase : MonoBehaviour
     {
-        if (collision.transform.CompareTag(tagToCompare))
+        [Header("Collect Setup")]
+        public ItemType itemType;
+        public string tagToCompare = "Player";
+        public int itemValue = 1;
+
+        public GameObject graphicItem;
+
+        [Header("Animation")]
+        public ParticleSystem particle;
+
+        [Header("Sounds")]
+        public AudioSource soundToUse;
+
+        private void OnTriggerEnter(Collider collision)
         {
-            Collect();
+            if (collision.transform.CompareTag(tagToCompare))
+            {
+                Collect();
+            }
         }
-    }
-    protected virtual void Collect()
-    {
-        SpriteRenderer iconRenderer = GetComponentInChildren<SpriteRenderer>();
-        if (iconRenderer != null)
+        protected virtual void Collect()
         {
-            iconRenderer.enabled = false;
+            SpriteRenderer iconRenderer = GetComponentInChildren<SpriteRenderer>();
+            if (iconRenderer != null)
+            {
+                iconRenderer.enabled = false;
+            }
+            OnCollected();
         }
-        OnCollected();
-    }
-    protected virtual void OnCollected()
-    {
-        if (particle != null)
+        protected virtual void OnCollected()
         {
-            particle.Play();
-            StartCoroutine(WaitAndDeactivate(particle.main.duration));
+            if (particle != null)
+            {
+                particle.Play();
+                StartCoroutine(WaitAndDeactivate(particle.main.duration));
+            }
+            else
+            {
+                gameObject.SetActive(false);
+            }
+            if (soundToUse != null)
+            {
+                soundToUse.Play();
+            }
+
+            ItemManager.Instance.AddItemByType(itemType, itemValue);
+
         }
-        else
+        private IEnumerator WaitAndDeactivate(float delay)
         {
+            yield return new WaitForSeconds(delay);
             gameObject.SetActive(false);
         }
-
-        if (soundToUse != null) { 
-            soundToUse.Play(); 
-        }
-
-    }
-    private IEnumerator WaitAndDeactivate(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        gameObject.SetActive(false);
     }
 }

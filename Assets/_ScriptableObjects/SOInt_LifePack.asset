@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af9ae5314d38ef149bc5dbaa20ced173, type: 3}
-  m_Name: SOInt_Energy
+  m_Name: SOInt_LifePack
   m_EditorClassIdentifier: Assembly-CSharp::SOInt
   value: 0

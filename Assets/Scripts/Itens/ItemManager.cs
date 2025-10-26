@@ -5,43 +5,73 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ItemManager : Singleton<ItemManager>
+
+namespace Itens
 {
-    [Header("Itens Collectable Setup")]
-    public SOInt itemCoins;
-    public SOInt itemEnergy;
-
-    [Header("Player Item Init Setup")]
-    public int initialCoins = 0;
-    public int initialEnergy = 100;
-
-    private void Start()
+    public enum ItemType
     {
-        ResetItens();
+        COIN,
+        LIFE_PACK
     }
-
-    private void ResetItens()
+    public class ItemManager : Singleton<ItemManager>
     {
-        itemCoins.value = initialCoins;
-        itemEnergy.value = initialEnergy;
+        [Header("Itens Collectable Setup")]
+        public List<ItemSetup> itemSetups;
+
+        private void Start()
+        {
+            ResetItens();
+        }
+
+        private void ResetItens()
+        {
+            foreach (var i in itemSetups)
+            {
+                i.SOInt.value = 0;
+            }
+        }
+
+        public void AddItemByType(ItemType itemType, int amountValue)
+        {
+            itemSetups.Find(i => i.itemType == itemType).SOInt.value += amountValue;
+        }
+        public void RemoveItemByType(ItemType itemType, int amountValue)
+        {
+            if (itemSetups.Find(i => i.itemType == itemType).SOInt.value > 0) 
+            {
+                itemSetups.Find(i => i.itemType == itemType).SOInt.value -= amountValue;
+            }            
+        }
+
+        #region DEBUG TEST
+        [NaughtyAttributes.Button]
+        public void TestAddCoin()
+        {
+            AddItemByType(ItemType.COIN, 1);
+        }
+        [NaughtyAttributes.Button]
+        public void TestRemoveCoin()
+        {
+            RemoveItemByType(ItemType.COIN, 1);
+        }
+        [NaughtyAttributes.Button]
+        public void TestAddLifePack()
+        {
+            AddItemByType(ItemType.LIFE_PACK, 1);
+        }
+        [NaughtyAttributes.Button]
+        public void TestRemoveLifePack()
+        {
+            RemoveItemByType(ItemType.LIFE_PACK, 1);
+        }
+        #endregion
+
     }
-
-    public void AddItemCoins(int amountCoins) {
-
-        itemCoins.value += amountCoins;
-        Debug.Log("Add Coin -> " + amountCoins + " / Total Coins -> " + itemCoins.value);
-    }
-
-    public void AddItemEnergy(int amountEnergy)
+    [System.Serializable]
+    public class ItemSetup
     {
-
-        itemEnergy.value += amountEnergy;
+        public ItemType itemType;
+        public SOInt SOInt;
     }
-
-    public void RemoveItemEnergy(int amountEnergy)
-    {
-
-        itemEnergy.value -= amountEnergy;
-    }
-
 }
+
