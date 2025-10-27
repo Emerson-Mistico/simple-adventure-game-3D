@@ -7,6 +7,9 @@ This project is licensed under the MIT License. Feel free to use and modify the 
 
 Artwork: artwork provided by the educational institution for use in the development of the activity and free assests provide by Unity Store.
 
+# Additional (external) licenses
+MEDKIT icon: available at https://www.flaticon.com/free-icons/doctor-briefcase
+
 # Features
 
 - UI animations
@@ -30,6 +33,10 @@ Consiste nella realizzazione di una semplice interfaccia utente e di animazioni,
 Questo progetto è distribuito sotto licenza MIT. Sei libero di utilizzare e modificare il codice per i tuoi scopi di apprendimento.
 
 Artwork: materiale grafico fornito dall’istituzione educativa per l’attività, insieme a risorse gratuite messe a disposizione dallo Unity Store. 
+
+# Licenze aggiuntive (esterne)
+
+Icona del MEDKIT: disponibile su https://www.flaticon.com/free-icons/doctor-briefcase
 
 # Caratteristiche
 
