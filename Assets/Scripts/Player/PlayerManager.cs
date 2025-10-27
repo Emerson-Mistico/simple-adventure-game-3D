@@ -193,7 +193,6 @@ public class PlayerManager : Singleton<PlayerManager>
             }
         }
     }
-
     private void ReactivatePlayer()
     {
         playerHealth.ResetLife();

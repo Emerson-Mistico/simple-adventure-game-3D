@@ -20,6 +20,11 @@ public class HealthBase_Player : MonoBehaviour, IDamageable
         Init();
     }
 
+    public bool LifeIsFull()
+    {
+        return _currentLife == startLife;
+    }
+
     private void Init() 
     {
         ResetLife();

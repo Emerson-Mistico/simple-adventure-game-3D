@@ -30,7 +30,10 @@ namespace Itens
                 i.SOInt.value = 0;
             }
         }
-
+        public ItemSetup GetItemByType(ItemType itemType)
+        {
+            return itemSetups.Find(i => i.itemType == itemType);
+        }
         public void AddItemByType(ItemType itemType, int amountValue)
         {
             itemSetups.Find(i => i.itemType == itemType).SOInt.value += amountValue;
@@ -72,6 +75,7 @@ namespace Itens
     {
         public ItemType itemType;
         public SOInt SOInt;
+        public Sprite icon;
     }
 }
 
